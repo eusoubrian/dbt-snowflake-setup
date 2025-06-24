@@ -1,0 +1,45 @@
+
+name: 'example'
+version: '1.0.0'
+config-version: 2
+
+profile: 'default'
+
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:         
+  - "target"
+  - "dbt_packages"
+
+models:
+  example:
+    
+    custom:
+      +schema: CUSTOM 
+    distribute:
+      +schema: DISTRIBUTE
+
+    landing:
+      +schema: LANDING
+    marts:
+      +schema: MARTS
+    staging:
+      +schema: STAGING
+    transform:
+      +schema: TRANSFORM
+
+    example:
+      materialized: view
+  
+seeds:
+  +schema: CUSTOM
+
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['example', 'sie_dbt_utils', 'dbt']
